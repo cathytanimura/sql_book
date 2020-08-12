@@ -1,0 +1,66 @@
+﻿NAICS  Code,Kind of Business,Jan. 2020,Feb. 2020,Mar. 2020,Apr. 2020,May 2020 (p)
+,"Retail and food services sales, total","481,862","479,868","481,513","410,345","507,477"
+,Retail sales and food services excl motor vehicle and parts,"388,594","382,009","398,836","340,412","399,076"
+,Retail sales and food services excl gasoline stations,"442,922","443,605","447,927","384,063","476,072"
+,Retail sales and food services excl motor vehicle and parts and gasoline stations,"349,654","345,746","365,250","314,130","367,671"
+,"Retail sales, total","421,093","417,777","434,185","380,223","465,086"
+,"Retail sales, total (excl. motor vehicle and parts dealers)","327,825","319,918","351,508","310,290","356,685"
+,GAFO(1),"94,367","96,592","94,807","68,325","89,642"
+441,Motor vehicle and parts dealers,"93,268","97,859","82,677","69,933","108,401"
+"4411, 4412",Automobile and other motor vehicle dealers,"85,823","90,701","75,298","63,060","100,037"
+4411,Automobile dealers,"80,728","84,600","68,585","56,406","88,289"
+44111,New car dealers,"71,757","74,033","59,312","50,003","77,758"
+44112,Used car dealers,"8,971","10,567","9,273","6,403","10,531"
+4413,"Automotive parts, acc., and tire stores","7,445","7,158","7,379","6,873","8,364"
+"442, 443","Furniture, home furn, electronics, and appliance stores","16,993","16,409","14,150","7,093","11,931"
+442,Furniture and home furnishings stores,"9,257","9,191","7,881","3,865","7,202"
+4421,Furniture stores,"4,904","5,035","4,288","1,904","4,074"
+4422,Home furnishings stores,"4,353","4,156","3,593","1,961",(S)
+44221,Floor covering stores,(S),(S),(S),(S),(S)
+442299,All other home furnishings stores,"2,408","2,183","1,436",390,(S)
+443,Electronics and appliance stores,"7,736","7,218","6,269","3,228","4,729"
+443141,Household appliance stores,"1,197","1,204","1,251","1,104","1,417"
+443142,Electronics stores,"6,539","6,014","5,018","2,124","3,312"
+444,Building mat. and garden equip. and supplies dealers,"27,887","27,164","33,087","36,783","43,124"
+4441,Building mat. and supplies dealers,"24,555","23,883","28,830","30,743","36,608"
+44412,Paint and wallpaper stores,903,896,"1,012",884,"1,016"
+44413,Hardware stores,"1,902","1,806","2,192","2,623","3,198"
+445,Food and beverage stores,"63,590","60,983","79,859","70,115","75,377"
+4451,Grocery stores,"57,667","54,814","72,608","63,230","67,113"
+44511,Supermarkets and other grocery (except convenience) stores,"55,178","52,341","70,095","61,049","64,519"
+4453,"Beer, wine, and liquor stores","4,388","4,533","5,521","5,211","6,285"
+446,Health and personal care stores,"30,047","28,746","32,025","26,709","27,305"
+44611,Pharmacies and drug stores,"25,209","23,934","27,839","24,749","24,545"
+447,Gasoline stations,"38,940","36,263","33,586","26,282","31,405"
+448,Clothing and clothing access. stores,"16,612","18,813","10,833","2,904","8,643"
+4481,Clothing stores,"12,060","13,058","7,443","1,923","5,597"
+44811,Men's clothing stores,550,527,267,90,141
+44812,Women's clothing stores,"2,532","2,797","1,564",495,"1,153"
+44814,Family clothing stores,"6,953","7,557","4,264",704,"3,036"
+44819,Other clothing stores,"1,103","1,185",791,433,837
+4482,Shoe stores,"2,293","2,873","1,730",424,"1,423"
+44831,Jewelry stores,"1,981",(S),(S),(S),(S)
+451,"Sporting goods, hobby, musical instrument, and book stores","5,807","5,573","5,190","3,381","6,154"
+45111,Sporting goods stores,"2,857","2,972","3,293","2,453","4,120"
+45112,"Hobby, toy, and game stores","1,156","1,180",852,357,"1,110"
+451211,Book stores,956,573,392,163,271
+452,General merchandise stores,"52,885","53,811","62,961","54,117","61,663"
+4521,Department stores,"8,479","9,139","7,871","5,804","8,346"
+452111,Department stores(excl. discount department stores),"2,293","2,648","1,177",12,"1,098"
+452112,Discount dept. stores,"6,186","6,491","6,694","5,792","7,248"
+4529,Other general merchandise stores,"44,406",44672,55090,"48,313","53,317"
+45291,Warehouse clubs and superstores,"38,360","38,426","47,185","40,843","44,921"
+45299,All other gen. merchandise stores,"6,046","6,246","7,905","7,470","8,396"
+453,Miscellaneous store retailers,"10,552","10,469","9,741","7,454","9,686"
+4532,"Office supplies, stationery, and gift stores","2,070","1,986","1,673",830,"1,251"
+45321,Office supplies and stationery stores,975,826,879,615,728
+45322,"Gift, novelty, and souvenir stores","1,095","1,160",794,215,523
+45330,Used merchandise stores,"1,388","1,426",882,308,740
+454,Nonstore retailers,"64,512","61,687","70,076","75,452","81,397"
+4541,Electronic shopping and mail-order houses,"56,350","53,979","62,588","69,952","75,973"
+45431,Fuel dealers,"3,448","2,901","2,459","1,687","1,420"
+722,Food services and drinking places,"60,769","62,091","47,328","30,122","42,391"
+7224,Drinking places,(S),(S),(S),(S),(S)
+7225,Restaurants and other eating places,"53,411","54,146","41,941","27,761","39,928"
+722511,Full service restaurants,"25,194",(S),(S),(S),(S)
+"722513, 722514, 722515",Limited service eating places,"28,217","28,158","25,080","20,611","27,457"
