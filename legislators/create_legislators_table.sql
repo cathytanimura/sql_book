@@ -63,7 +63,9 @@ full_name --name_official_full
 ,id_fec_2
 )
 SELECT 
-name_official_full
+case when name_official_full is null and name_middle is null then name_first ||' '||name_last
+     when name_official_full is null then name_first||' '|| name_middle ||' '|| name_last
+     else name_official_full end
 ,name_first
 ,name_last
 ,name_middle
@@ -124,7 +126,9 @@ full_name --name_official_full
 ,id_fec_2
 )
 SELECT 
-name_official_full
+case when name_official_full is null and name_middle is null then name_first ||' '||name_last
+     when name_official_full is null then name_first||' '|| name_middle ||' '|| name_last
+     else name_official_full end
 ,name_first
 ,name_last
 ,name_middle
@@ -155,4 +159,3 @@ name_official_full
 ,id_fec_2
 FROM book_legislators_historical
 ;
-
