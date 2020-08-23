@@ -71,6 +71,7 @@ id_bioguide
 ,terms_0_rss_url
 ,terms_0_caucus
 FROM book_legislators_current
+WHERE terms_0_type is not null
 ;
 
 INSERT into legislators_terms
@@ -116,6 +117,7 @@ id_bioguide
 ,terms_0_state_rank
 ,terms_0_rss_url
 FROM book_legislators_historical
+WHERE terms_0_type is not null
 ;
 
 -- term 1
@@ -164,6 +166,7 @@ id_bioguide
 ,terms_1_rss_url
 ,terms_1_caucus
 FROM book_legislators_current
+WHERE terms_1_type is not null
 ;
 
 INSERT into legislators_terms
@@ -209,6 +212,7 @@ id_bioguide
 ,terms_1_state_rank
 ,terms_1_rss_url
 FROM book_legislators_historical
+WHERE terms_1_type is not null
 ;
 
 -- term 2
@@ -257,6 +261,7 @@ id_bioguide
 ,terms_2_rss_url
 ,terms_2_caucus
 FROM book_legislators_current
+WHERE terms_2_type is not null
 ;
 
 INSERT into legislators_terms
@@ -302,6 +307,7 @@ id_bioguide
 ,terms_2_state_rank
 ,terms_2_rss_url
 FROM book_legislators_historical
+WHERE terms_2_type is not null
 ;
 
 
@@ -351,6 +357,7 @@ id_bioguide
 ,terms_3_rss_url
 ,terms_3_caucus
 FROM book_legislators_current
+WHERE terms_3_type is not null
 ;
 
 INSERT into legislators_terms
@@ -396,6 +403,7 @@ id_bioguide
 ,terms_3_state_rank
 ,terms_3_rss_url
 FROM book_legislators_historical
+WHERE terms_3_type is not null
 ;
 
 
@@ -445,6 +453,7 @@ id_bioguide
 ,terms_4_rss_url
 ,terms_4_caucus
 FROM book_legislators_current
+WHERE terms_4_type is not null
 ;
 
 INSERT into legislators_terms
@@ -490,6 +499,7 @@ id_bioguide
 ,terms_4_state_rank
 ,terms_4_rss_url
 FROM book_legislators_historical
+WHERE terms_4_type is not null
 ;
 
 
@@ -539,6 +549,7 @@ id_bioguide
 ,terms_5_rss_url
 ,terms_5_caucus
 FROM book_legislators_current
+WHERE terms_5_type is not null
 ;
 
 INSERT into legislators_terms
@@ -584,6 +595,7 @@ id_bioguide
 ,terms_5_state_rank
 ,terms_5_rss_url
 FROM book_legislators_historical
+WHERE terms_5_type is not null
 ;
 
 
@@ -633,6 +645,7 @@ id_bioguide
 ,terms_6_rss_url
 ,terms_6_caucus
 FROM book_legislators_current
+WHERE terms_6_type is not null
 ;
 
 INSERT into legislators_terms
@@ -678,6 +691,7 @@ id_bioguide
 ,terms_6_state_rank
 ,terms_6_rss_url
 FROM book_legislators_historical
+WHERE terms_6_type is not null
 ;
 
 
@@ -727,6 +741,7 @@ id_bioguide
 ,terms_7_rss_url
 ,terms_7_caucus
 FROM book_legislators_current
+WHERE terms_7_type is not null
 ;
 
 INSERT into legislators_terms
@@ -772,10 +787,8 @@ id_bioguide
 ,terms_7_state_rank
 ,terms_7_rss_url
 FROM book_legislators_historical
+WHERE terms_7_type is not null
 ;
-
-
-
 
 -- term 8
 INSERT into legislators_terms
@@ -823,6 +836,7 @@ id_bioguide
 ,terms_8_rss_url
 ,terms_8_caucus
 FROM book_legislators_current
+WHERE terms_8_type is not null
 ;
 
 INSERT into legislators_terms
@@ -868,10 +882,8 @@ id_bioguide
 ,terms_8_state_rank
 ,terms_8_rss_url
 FROM book_legislators_historical
+WHERE terms_8_type is not null
 ;
-
-
-
 
 -- term 9
 INSERT into legislators_terms
@@ -919,6 +931,7 @@ id_bioguide
 ,terms_9_rss_url
 ,terms_9_caucus
 FROM book_legislators_current
+WHERE terms_9_type is not null
 ;
 
 INSERT into legislators_terms
@@ -964,6 +977,7 @@ id_bioguide
 ,terms_9_state_rank
 ,terms_9_rss_url
 FROM book_legislators_historical
+WHERE terms_9_type is not null
 ;
 
 -- term 10
@@ -1012,6 +1026,7 @@ id_bioguide
 ,terms_10_rss_url
 ,terms_10_caucus
 FROM book_legislators_current
+WHERE terms_10_type is not null
 ;
 
 INSERT into legislators_terms
@@ -1057,6 +1072,7 @@ id_bioguide
 --,terms_10_state_rank
 ,terms_10_rss_url
 FROM book_legislators_historical
+WHERE terms_10_type is not null
 ;
 
 
@@ -1106,6 +1122,7 @@ id_bioguide
 ,terms_11_rss_url
 --,terms_11_caucus
 FROM book_legislators_current
+WHERE terms_11_type is not null
 ;
 
 INSERT into legislators_terms
@@ -1151,6 +1168,7 @@ id_bioguide
 --,terms_11_state_rank
 ,terms_11_rss_url
 FROM book_legislators_historical
+WHERE terms_11_type is not null
 ;
 
 -- term 12
@@ -1199,6 +1217,7 @@ id_bioguide
 ,terms_12_rss_url
 --,terms_12_caucus
 FROM book_legislators_current
+WHERE terms_12_type is not null
 ;
 
 INSERT into legislators_terms
@@ -1244,6 +1263,7 @@ id_bioguide
 --,terms_12_state_rank
 ,terms_12_rss_url
 FROM book_legislators_historical
+WHERE terms_12_type is not null
 ;
 
 -- term 13
@@ -1292,6 +1312,7 @@ id_bioguide
 ,terms_13_rss_url
 --,terms_13_caucus
 FROM book_legislators_current
+WHERE terms_13_type is not null
 ;
 
 INSERT into legislators_terms
@@ -1337,6 +1358,7 @@ id_bioguide
 --,terms_13_state_rank
 ,terms_13_rss_url
 FROM book_legislators_historical
+WHERE terms_13_type is not null
 ;
 
 
@@ -1386,6 +1408,7 @@ id_bioguide
 ,terms_14_rss_url
 --,terms_14_caucus
 FROM book_legislators_current
+WHERE terms_14_type is not null
 ;
 
 INSERT into legislators_terms
@@ -1431,6 +1454,7 @@ id_bioguide
 --,terms_14_state_rank
 ,terms_14_rss_url
 FROM book_legislators_historical
+WHERE terms_14_type is not null
 ;
 
 -- term 15
@@ -1479,6 +1503,7 @@ id_bioguide
 ,terms_15_rss_url
 --,terms_15_caucus
 FROM book_legislators_current
+WHERE terms_15_type is not null
 ;
 
 INSERT into legislators_terms
@@ -1524,6 +1549,7 @@ id_bioguide
 --,terms_15_state_rank
 ,terms_15_rss_url
 FROM book_legislators_historical
+WHERE terms_15_type is not null
 ;
 
 
@@ -1573,6 +1599,7 @@ id_bioguide
 ,terms_16_rss_url
 --,terms_16_caucus
 FROM book_legislators_current
+WHERE terms_16_type is not null
 ;
 
 INSERT into legislators_terms
@@ -1618,6 +1645,7 @@ id_bioguide
 --,terms_16_state_rank
 ,terms_16_rss_url
 FROM book_legislators_historical
+WHERE terms_16_type is not null
 ;
 
 
@@ -1667,6 +1695,7 @@ id_bioguide
 ,terms_17_rss_url
 --,terms_17_caucus
 FROM book_legislators_current
+WHERE terms_17_type is not null
 ;
 
 INSERT into legislators_terms
@@ -1712,6 +1741,7 @@ id_bioguide
 --,terms_17_state_rank
 ,terms_17_rss_url
 FROM book_legislators_historical
+WHERE terms_17_type is not null
 ;
 
 -- term 18
@@ -1760,6 +1790,7 @@ id_bioguide
 ,terms_18_rss_url
 --,terms_18_caucus
 FROM book_legislators_current
+WHERE terms_18_type is not null
 ;
 
 INSERT into legislators_terms
@@ -1805,6 +1836,7 @@ id_bioguide
 --,terms_18_state_rank
 ,terms_18_rss_url
 FROM book_legislators_historical
+WHERE terms_18_type is not null
 ;
 
 
@@ -1854,6 +1886,7 @@ id_bioguide
 ,terms_19_rss_url
 --,terms_19_caucus
 FROM book_legislators_current
+WHERE terms_19_type is not null
 ;
 
 INSERT into legislators_terms
@@ -1899,6 +1932,7 @@ id_bioguide
 --,terms_19_state_rank
 ,terms_19_rss_url
 FROM book_legislators_historical
+WHERE terms_19_type is not null
 ;
 
 
@@ -1948,6 +1982,7 @@ id_bioguide
 ,terms_20_rss_url
 --,terms_20_caucus
 FROM book_legislators_current
+WHERE terms_20_type is not null
 ;
 
 INSERT into legislators_terms
@@ -1993,6 +2028,7 @@ id_bioguide
 --,terms_20_state_rank
 --,terms_20_rss_url
 FROM book_legislators_historical
+WHERE terms_20_type is not null
 ;
 
 
@@ -2042,6 +2078,7 @@ id_bioguide
 ,terms_21_rss_url
 --,terms_21_caucus
 FROM book_legislators_current
+WHERE terms_21_type is not null
 ;
 
 INSERT into legislators_terms
@@ -2087,6 +2124,7 @@ id_bioguide
 --,terms_21_state_rank
 ,terms_21_rss_url
 FROM book_legislators_historical
+WHERE terms_21_type is not null
 ;
 
 -- term 22
@@ -2135,6 +2173,7 @@ id_bioguide
 ,terms_22_rss_url
 --,terms_22_caucus
 FROM book_legislators_current
+WHERE terms_22_type is not null
 ;
 
 INSERT into legislators_terms
@@ -2180,6 +2219,7 @@ id_bioguide
 --,terms_22_state_rank
 ,terms_22_rss_url
 FROM book_legislators_historical
+WHERE terms_22_type is not null
 ;
 
 
@@ -2229,6 +2269,7 @@ id_bioguide
 ,terms_23_rss_url
 --,terms_23_caucus
 FROM book_legislators_current
+WHERE terms_23_type is not null
 ;
 
 INSERT into legislators_terms
@@ -2274,11 +2315,10 @@ id_bioguide
 --,terms_23_state_rank
 --,terms_23_rss_url
 FROM book_legislators_historical
+WHERE terms_23_type is not null
 ;
 
-
 -- term 24 (only historical)
-
 INSERT into legislators_terms
 (
 id_bioguide
@@ -2322,6 +2362,7 @@ id_bioguide
 --,terms_24_state_rank
 ,terms_24_rss_url
 FROM book_legislators_historical
+WHERE terms_24_type is not null
 ;
 
 -- term 25
@@ -2368,6 +2409,7 @@ id_bioguide
 --,terms_25_state_rank
 ,terms_25_rss_url
 FROM book_legislators_historical
+WHERE terms_25_type is not null
 ;
 
 -- term 26
@@ -2414,6 +2456,7 @@ id_bioguide
 --,terms_26_state_rank
 ,terms_26_rss_url
 FROM book_legislators_historical
+WHERE terms_26_type is not null
 ;
 
 -- term 27
@@ -2460,6 +2503,7 @@ id_bioguide
 --,terms_27_state_rank
 --,terms_27_rss_url
 FROM book_legislators_historical
+WHERE terms_27_type is not null
 ;
 
 -- term 28
@@ -2506,6 +2550,7 @@ id_bioguide
 --,terms_28_state_rank
 --,terms_28_rss_url
 FROM book_legislators_historical
+WHERE terms_28_type is not null
 ;
 
 -- term 29
@@ -2552,5 +2597,5 @@ id_bioguide
 --,terms_29_state_rank
 --,terms_29_rss_url
 FROM book_legislators_historical
+WHERE terms_29_type is not null
 ;
-
