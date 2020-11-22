@@ -166,3 +166,7 @@ id_bioguide ||'-'|| 7 ||'-'|| 'leadership'
 FROM book_legislators_current
 ;
 
+DELETE 
+FROM legislators_leadership_roles
+WHERE title is null
+;
