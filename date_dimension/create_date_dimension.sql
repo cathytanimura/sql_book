@@ -7,18 +7,18 @@ SELECT date::date
 ,date_part('day',date)::int as day_of_month
 ,date_part('doy',date)::int as day_of_year
 ,date_part('dow',date)::int as day_of_week
-,to_char(date, 'Day') as day_name
-,to_char(date, 'Dy') as day_short_name
+,trim(to_char(date, 'Day')) as day_name
+,trim(to_char(date, 'Dy')) as day_short_name
 ,date_part('week',date)::int as week_number
 ,to_char(date,'W')::int as week_of_month
 ,date_trunc('week',date)::date as week
 ,date_part('month',date)::int as month_number
-,to_char(date, 'Month') as month_name
-,to_char(date, 'Mon') as month_short_name
+,trim(to_char(date, 'Month')) as month_name
+,trim(to_char(date, 'Mon')) as month_short_name
 ,date_trunc('month',date)::date as first_day_of_month
 ,(date_trunc('month',date) + interval '1 month' - interval '1 day')::date as last_day_of_month
 ,date_part('quarter',date)::int as quarter_number
-,'Q' || date_part('quarter',date)::int as quarter_name
+,trim('Q' || date_part('quarter',date)::int) as quarter_name
 ,date_trunc('quarter',date)::date as first_day_of_quarter
 ,(date_trunc('quarter',date) + interval '3 months' - interval '1 day')::date as last_day_of_quarter
 ,date_part('year',date)::int as year 
