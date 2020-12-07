@@ -24,5 +24,5 @@ SELECT date::date
 ,date_part('year',date)::int as year 
 ,date_part('decade',date)::int * 10 as decade
 ,date_part('century',date)::int as centurys
-FROM generate_series('1990-01-01'::date, '2030-12-31'::date, '1 day') as date
+FROM generate_series('1770-01-01'::date, '2030-12-31'::date, '1 day') as date
 ;
