@@ -23,3 +23,11 @@ id_bioguide varchar
 ,caucus varchar -- terms_1_caucus
 )
 ;
+
+COPY legislators_terms
+FROM '/localpath/legislators_terms.csv' -- change to the location you saved the csv file
+DELIMITER ','
+CSV HEADER
+;
+
+
