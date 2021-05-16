@@ -33,3 +33,10 @@ full_name varchar--name_official_full
 ,id_fec_2 varchar
 )
 ;
+
+COPY legislators
+FROM '/localpath/legislators.csv' -- change to the location you saved the csv file
+DELIMITER ','
+CSV HEADER
+;
+
