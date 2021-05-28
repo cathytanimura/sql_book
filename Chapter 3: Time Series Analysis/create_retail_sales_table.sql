@@ -6,7 +6,7 @@ sales_month date
 ,naics_code varchar
 ,kind_of_business varchar
 ,reason_for_null varchar
-,sales int
+,sales decimal
 )
 ;
 
