@@ -313,12 +313,115 @@ ORDER BY 2,1
 ;
 
 ----------- Dealing with sparse cohorts
+SELECT first_state, gender, period
+,first_value(cohort_retained) over (partition by first_state, gender 
+                                    order by period) as cohort_size
+,cohort_retained
+,cohort_retained / 
+ first_value(cohort_retained) over (partition by first_state, gender 
+                                    order by period) as pct_retained
+FROM
+(
+        SELECT a.first_state, d.gender
+        ,coalesce(date_part('year',age(c.date,a.first_term)),0) as period
+        ,count(distinct a.id_bioguide) as cohort_retained
+        FROM
+        (
+                SELECT distinct id_bioguide
+                ,min(term_start) over (partition by id_bioguide) as first_term
+                ,first_value(state) over (partition by id_bioguide 
+                                          order by term_start) as first_state
+                FROM legislators_terms 
+        ) a
+        JOIN legislators_terms b on a.id_bioguide = b.id_bioguide 
+        LEFT JOIN date_dim c on c.date between b.term_start and b.term_end 
+        and c.month_name = 'December' and c.day_of_month = 31
+        JOIN legislators d on a.id_bioguide = d.id_bioguide
+        WHERE a.first_term between '1917-01-01' and '1999-12-31'
+        GROUP BY 1,2,3
+) aa
+;
 
 
 
-SELECT gender
-,state
-,cohort_size as cohort
+SELECT aa.gender, aa.first_state, cc.period, aa.cohort_size
+FROM
+(
+        SELECT b.gender, a.first_state
+        ,count(distinct a.id_bioguide) as cohort_size
+        FROM 
+        (
+                SELECT distinct id_bioguide
+                ,min(term_start) over (partition by id_bioguide) as first_term
+                ,first_value(state) over (partition by id_bioguide 
+                                          order by term_start) as first_state
+                FROM legislators_terms 
+        ) a
+        JOIN legislators b on a.id_bioguide = b.id_bioguide
+        WHERE a.first_term between '1917-01-01' and '1999-12-31' 
+        GROUP BY 1,2
+) aa
+JOIN
+(
+        SELECT generate_series as period 
+        FROM generate_series(0,20,1)
+) cc on 1 = 1
+;
+
+
+SELECT aaa.gender, aaa.first_state, aaa.period, aaa.cohort_size
+,coalesce(ddd.cohort_retained,0) as cohort_retained
+,coalesce(ddd.cohort_retained,0) * 1.0 / aaa.cohort_size as pct_retained
+FROM
+(
+SELECT aa.gender, aa.first_state, cc.period, aa.cohort_size
+FROM
+(
+        SELECT b.gender, a.first_state
+        ,count(distinct a.id_bioguide) as cohort_size
+        FROM 
+        (
+                SELECT distinct id_bioguide
+                ,min(term_start) over (partition by id_bioguide) as first_term
+                ,first_value(state) over (partition by id_bioguide 
+                                          order by term_start) as first_state
+                FROM legislators_terms 
+        ) a
+        JOIN legislators b on a.id_bioguide = b.id_bioguide 
+        WHERE a.first_term between '1917-01-01' and '1999-12-31' 
+        GROUP BY 1,2
+) aa
+JOIN
+(
+        SELECT generate_series as period 
+        FROM generate_series(0,20,1)
+) cc on 1 = 1
+) aaa
+LEFT JOIN
+(
+        SELECT d.first_state, g.gender
+        ,coalesce(date_part('year',age(f.date,d.first_term)),0) as period
+        ,count(distinct d.id_bioguide) as cohort_retained
+        FROM
+        (
+                SELECT distinct id_bioguide
+                ,min(term_start) over (partition by id_bioguide) as first_term
+                ,first_value(state) over (partition by id_bioguide 
+                                          order by term_start) as first_state
+                FROM legislators_terms 
+        ) d
+        JOIN legislators_terms e on d.id_bioguide = e.id_bioguide 
+        LEFT JOIN date_dim f on f.date between e.term_start and e.term_end 
+        and f.month_name = 'December' and f.day_of_month = 31
+        JOIN legislators g on d.id_bioguide = g.id_bioguide
+        WHERE d.first_term between '1917-01-01' and '1999-12-31'
+        GROUP BY 1,2,3
+) ddd on aaa.gender = ddd.gender and aaa.first_state = ddd.first_state 
+and aaa.period = ddd.period
+ORDER BY 1,2,3
+;
+
+SELECT gender, first_state, cohort_size
 ,max(case when period = 0 then pct_retained end) as yr0
 ,max(case when period = 2 then pct_retained end) as yr2
 ,max(case when period = 4 then pct_retained end) as yr4
@@ -327,122 +430,57 @@ SELECT gender
 ,max(case when period = 10 then pct_retained end) as yr10
 FROM
 (
-        SELECT gender, state, period
-        ,first_value(cohort_retained) over (partition by gender, state order by period) as cohort_size
-        ,cohort_retained
-        ,round(cohort_retained * 100.0 / first_value(cohort_retained) over (partition by gender, state order by period),1) as pct_retained
+        SELECT aaa.gender, aaa.first_state, aaa.period, aaa.cohort_size
+        ,coalesce(ddd.cohort_retained,0) as cohort_retained
+        ,coalesce(ddd.cohort_retained,0) * 1.0 / aaa.cohort_size as pct_retained
         FROM
         (
-                SELECT gender, state, coalesce(period,0) as period
-                ,count(distinct id_bioguide) as cohort_retained
-                FROM
-                (
-                        SELECT distinct aa.id_bioguide, aa.gender, aa.state, aa.first_term
-                        ,date_part('year',age(bb.date,aa.first_term)) as period
-                        FROM
-                        (
-                                SELECT a.id_bioguide, a.first_term,b.term_start, b.term_end, b.state, c.gender
-                                FROM
-                                (
-                                        SELECT id_bioguide
-                                        ,min(term_start) as first_term
-                                        FROM legislators_terms 
-                                        GROUP BY 1
-                                ) a
-                                JOIN legislators_terms b on a.id_bioguide = b.id_bioguide
-                                JOIN legislators c on a.id_bioguide = c.id_bioguide and c.gender = 'F'
-                        ) aa
-                        LEFT JOIN date_dim bb on bb.date between aa.term_start and aa.term_end and bb.month_name = 'December' and bb.day_of_month = 31
-                ) aaa
-                WHERE first_term between '1917-01-01' and '2009-12-31' 
-                GROUP BY 1,2,3
-        ) aaaa
-) aaaaa
-GROUP BY 1,2,3
-;
-
-SELECT aa.gender, aa.state, cc.period, aa.cohort
-FROM
-(
-        SELECT a.gender, b.state
-        ,count(distinct a.id_bioguide) as cohort
-        FROM legislators a
-        JOIN 
-        (
-                SELECT id_bioguide, state, min(term_start) as first_term
-                FROM legislators_terms 
-                GROUP BY 1,2
-        ) b on a.id_bioguide = b.id_bioguide
-        WHERE a.gender = 'F'
-        and first_term between '1917-01-01' and '2009-12-31' 
-        GROUP BY 1,2
-) aa
-JOIN
-(
-        SELECT distinct date_part('year',age(d.term_start,c.term_start))::int 
-        as period
-        FROM legislators_terms c
-        JOIN legislators_terms d on c.id_bioguide = d.id_bioguide 
-        and c.term_start < d.term_start
-) cc on 1 = 1
-WHERE cc.period <= 20
-;
-
-SELECT aaa.gender, aaa.state, aaa.period, aaa.cohort
-,coalesce(eeee.cohort_retained,0) as cohort_retained
-,round(coalesce(eeee.cohort_retained,0) * 100.0 / aaa.cohort,1) as pct_retained
-FROM
-(
-        SELECT aa.gender, aa.state, bb.period, aa.cohort
+        SELECT aa.gender, aa.first_state, cc.period, aa.cohort_size
         FROM
         (
-                SELECT a.gender, b.state
-                ,count(distinct a.id_bioguide) as cohort
-                FROM legislators a
-                JOIN 
+                SELECT b.gender, a.first_state
+                ,count(distinct a.id_bioguide) as cohort_size
+                FROM 
                 (
-                        SELECT id_bioguide, state, min(term_start) as first_term
+                        SELECT distinct id_bioguide
+                        ,min(term_start) over (partition by id_bioguide) as first_term
+                        ,first_value(state) over (partition by id_bioguide 
+                                                  order by term_start) as first_state
                         FROM legislators_terms 
-                        GROUP BY 1,2
-                ) b on a.id_bioguide = b.id_bioguide
-                WHERE a.gender = 'F'
-                and first_term between '1917-01-01' and '2009-12-31' 
+                ) a
+                JOIN legislators b on a.id_bioguide = b.id_bioguide 
+                WHERE a.first_term between '1917-01-01' and '1999-12-31' 
                 GROUP BY 1,2
         ) aa
         JOIN
         (
-                SELECT distinct date_part('year',age(d.term_start,c.term_start))::int as period
-                FROM legislators_terms c
-                JOIN legislators_terms d on c.id_bioguide = d.id_bioguide and c.term_start < d.term_start
-        ) bb on 1 = 1
-        WHERE bb.period <= 20
-) aaa
-LEFT JOIN
-(
-        SELECT gender, state, coalesce(period,0) as period
-        ,count(distinct id_bioguide) as cohort_retained
-        FROM
+                SELECT generate_series as period 
+                FROM generate_series(0,20,1)
+        ) cc on 1 = 1
+        ) aaa
+        LEFT JOIN
         (
-                SELECT distinct ee.id_bioguide, ee.gender, ee.state, ee.first_term
-                ,date_part('year',age(ff.date,ee.first_term)) as period
+                SELECT d.first_state, g.gender
+                ,coalesce(date_part('year',age(f.date,d.first_term)),0) as period
+                ,count(distinct d.id_bioguide) as cohort_retained
                 FROM
                 (
-                        SELECT e.id_bioguide, e.first_term, f.term_start, f.term_end, g.gender, f.state
-                        FROM
-                        (
-                                SELECT id_bioguide, min(term_start) as first_term
-                                FROM legislators_terms 
-                                GROUP BY 1
-                        ) e
-                        JOIN legislators_terms f on e.id_bioguide = f.id_bioguide
-                        JOIN legislators g on e.id_bioguide = g.id_bioguide  and g.gender = 'F'
-                ) ee
-                LEFT JOIN date_dim ff on ff.date between ee.term_start and ee.term_end and ff.month_name = 'December' and ff.day_of_month = 31
-        ) eee
-        WHERE first_term between '1917-01-01' and '2009-12-31' 
-        GROUP BY 1,2,3
-) eeee on aaa.gender = eeee.gender and aaa.state = eeee.state 
-and aaa.period = eeee.period
+                        SELECT distinct id_bioguide
+                        ,min(term_start) over (partition by id_bioguide) as first_term
+                        ,first_value(state) over (partition by id_bioguide 
+                                                  order by term_start) as first_state
+                        FROM legislators_terms 
+                ) d
+                JOIN legislators_terms e on d.id_bioguide = e.id_bioguide 
+                LEFT JOIN date_dim f on f.date between e.term_start and e.term_end 
+                and f.month_name = 'December' and f.day_of_month = 31
+                JOIN legislators g on d.id_bioguide = g.id_bioguide
+                WHERE d.first_term between '1917-01-01' and '1999-12-31'
+                GROUP BY 1,2,3
+        ) ddd on aaa.gender = ddd.gender and aaa.first_state = ddd.first_state 
+        and aaa.period = ddd.period
+) a
+GROUP BY 1,2,3
 ;
 
 ----------- Defining cohorts from dates other than the first date ----------------------------------
