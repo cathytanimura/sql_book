@@ -204,6 +204,140 @@ GROUP BY 1,2,3
 ORDER BY 2,4 desc
 ;
 
+SELECT type, count(*) as records
+FROM earthquakes
+GROUP BY 1
+ORDER BY 2 desc
+;
+
+-- Anomalous counts or frequencies
+SELECT date_trunc('year',time)::date as earthquake_year
+,count(*) as earthquakes
+FROM earthquakes
+GROUP BY 1
+;
+
+SELECT date_trunc('month',time)::date as earthquake_year
+,count(*) as earthquakes
+FROM earthquakes
+GROUP BY 1
+;
+
+SELECT date_trunc('month',time)::date as earthquake_month
+,status
+,count(*) as earthquakes
+FROM earthquakes
+GROUP BY 1,2
+ORDER BY 1
+;
+
+SELECT place, count(*) as earthquakes
+FROM earthquakes
+WHERE mag >= 6
+GROUP BY 1
+ORDER BY 2 desc
+;
+
+SELECT 
+case when place like '% of %' then split_part(place,' of ',2)
+     else place
+     end as place
+,count(*) as earthquakes
+FROM earthquakes
+WHERE mag >= 6
+GROUP BY 1
+ORDER BY 2 desc
+;
+
+-- Anomalies from the absence of data
+SELECT place
+,extract('days' from '2020-12-31 23:59:59' - latest) 
+ as days_since_latest
+,count(*) as earthquakes
+,extract('days' from avg(gap)) as avg_gap
+,extract('days' from max(gap)) as max_gap
+FROM
+(
+        SELECT place
+        ,time
+        ,lead(time) over (partition by place order by time) as next_time
+        ,lead(time) over (partition by place order by time) - time as gap
+        ,max(time) over (partition by place) as latest
+        FROM
+        (
+                SELECT 
+                replace(
+                  initcap(
+                  case when place ~ ', [A-Z]' then split_part(place,', ',2)
+                       when place like '% of %' then split_part(place,' of ',2)
+                       else place end
+                )
+                ,'Region','')
+                as place
+                ,time
+                FROM earthquakes
+                WHERE mag > 5
+        ) a
+) a         
+GROUP BY 1,2        
+;
+
+------ Handling anomalies
+-- Removal
+SELECT time, mag, type
+FROM earthquakes
+WHERE mag not in (-9,-9.99)
+limit 100
+;
+
+SELECT avg(mag) as avg_mag
+,avg(case when mag > -9 then mag end) as avg_mag_adjusted
+FROM earthquakes
+;
+
+SELECT avg(mag) as avg_mag
+,avg(case when mag > -9 then mag end) as avg_mag_adjusted
+FROM earthquakes
+WHERE place = 'Yellowstone National Park, Wyoming'
+;
+
+-- Replacement with alternate values
+SELECT 
+case when type = 'earthquake' then type
+     else 'Other'
+     end as event_type
+,count(*)
+FROM earthquakes
+GROUP BY 1
+;
+
+SELECT a.time, a.place, a.mag
+,case when a.mag > b.percentile_95 then b.percentile_95
+      when a.mag < b.percentile_05 then b.percentile_05
+      else a.mag
+      end as mag_winsorized
+FROM earthquakes a
+JOIN
+(
+SELECT percentile_cont(0.95) within group (order by mag) 
+ as percentile_95
+,percentile_cont(0.05) within group (order by mag) 
+ as percentile_05
+FROM earthquakes
+) b on 1 = 1 
+;
+
+-- Rescaling
+SELECT round(depth,1) as depth
+,log(round(depth,1)) as log_depth
+,count(*) as earthquakes
+FROM earthquakes
+WHERE depth >= 0.05
+GROUP BY 1,2
+;
+
+
+
 
 
 
