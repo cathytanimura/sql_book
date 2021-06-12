@@ -222,7 +222,7 @@ FROM earthquakes
 GROUP BY 1
 ;
 
-SELECT date_trunc('month',time)::date as earthquake_year
+SELECT date_trunc('month',time)::date as earthquake_month
 ,count(*) as earthquakes
 FROM earthquakes
 GROUP BY 1
