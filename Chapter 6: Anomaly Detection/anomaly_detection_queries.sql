@@ -130,22 +130,27 @@ WHERE place like '%Japan%'
 ORDER BY 1
 ;
 
+SELECT ntile_25, median, ntile_75
+,(ntile_75 - ntile_25) * 1.5 as iqr
+,ntile_25 - (ntile_75 - ntile_25) * 1.5 as lower_whisker
+,ntile_75 + (ntile_75 - ntile_25) * 1.5 as upper_whisker
+FROM
+(
+        SELECT percentile_cont(0.25) within group (order by mag) as ntile_25
+        ,percentile_cont(0.5) within group (order by mag) as median
+        ,percentile_cont(0.75) within group (order by mag) as ntile_75
+        FROM earthquakes
+        WHERE place like '%Japan%'
+) a
+;
+
+-- the previous query can be written without the subquery:
 SELECT percentile_cont(0.25) within group (order by mag) as ntile_25
 ,percentile_cont(0.5) within group (order by mag) as median
 ,percentile_cont(0.75) within group (order by mag) as ntile_75
-,1.5 * (percentile_cont(0.75) within group (order by mag) 
-        - percentile_cont(0.25) within group (order by mag)
-        ) as iqr 
-,percentile_cont(0.25) within group (order by mag) 
-   - (1.5 * (percentile_cont(0.75) within group (order by mag) 
-             - percentile_cont(0.25) within group (order by mag)
-             )
-     ) as lower_whisker
-,percentile_cont(0.75) within group (order by mag) 
-   + (1.5 * (percentile_cont(0.75) within group (order by mag) 
-             - percentile_cont(0.25) within group (order by mag)
-             )
-     ) as upper_whisker
+,1.5 * (percentile_cont(0.75) within group (order by mag) - percentile_cont(0.25) within group (order by mag)) as iqr 
+,percentile_cont(0.25) within group (order by mag) - (1.5 * (percentile_cont(0.75) within group (order by mag) - percentile_cont(0.25) within group (order by mag))) as lower_whisker
+,percentile_cont(0.75) within group (order by mag) + (1.5 * (percentile_cont(0.75) within group (order by mag) - percentile_cont(0.25) within group (order by mag))) as upper_whisker
 FROM earthquakes
 WHERE place like '%Japan%'
 ;
