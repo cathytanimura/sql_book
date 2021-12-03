@@ -13,3 +13,9 @@ Data Podcasts (these cover a range of analytics and data science topics, but are
 Data Newsletters
 * Data Elixir: https://dataelixir.com/
 
+Books - Non-technical (
+* How to Measure Anything: Finding the Value of "Intangibles" in Business by Douglas Hubbard
+* Thinking, Fast and Slow by Daniel Kahneman
+* Mastermind: How to Think Like Sherlock Holmes by Maria Konnikova
+* The Black Swan: The Impact of the Highly Improbable by Nassim Nicholas Taleb
+* Brain Rules: 12 Principles for Surviving and Thriving at Work, Home, and School
