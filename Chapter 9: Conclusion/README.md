@@ -9,3 +9,7 @@ Data Podcasts (these cover a range of analytics and data science topics, but are
 * TWIML: https://twimlai.com/shows/
 * Women in Data Science: https://www.widsconference.org/podcast.html
 * You are Not So Smart: https://youarenotsosmart.com/podcast/
+
+Data Newsletters
+* Data Elixir: https://dataelixir.com/
+
