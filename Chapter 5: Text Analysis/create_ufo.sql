@@ -1,7 +1,7 @@
 DROP table if exists ufo;
 CREATE table ufo
 (
-,sighting_report varchar(1000)
+sighting_report varchar(1000)
 ,description text
 )
 ;
