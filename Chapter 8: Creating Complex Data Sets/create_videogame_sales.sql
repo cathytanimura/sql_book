@@ -16,4 +16,4 @@ rank int
 ;
 
 -- change localpath to the location of the saved file
-COPY videogame_sales FROM 'localpath/videogame_sales.csv' DELIMITER ',' CSV HEADER;
+COPY videogame_sales FROM '/localpath/videogame_sales.csv' DELIMITER ',' CSV HEADER;

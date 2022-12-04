@@ -7,7 +7,7 @@ user_id int
 )
 ;
 
-COPY game_actions FROM '/localpath/game_users.csv' DELIMITER ',' CSV HEADER;
+COPY game_users FROM '/localpath/game_users.csv' DELIMITER ',' CSV HEADER;
 
 DROP table if exists game_actions;
 CREATE table game_actions
@@ -29,7 +29,7 @@ user_id int
 )
 ;
 
-COPY game_actions FROM '/localpath/game_purchases.csv' DELIMITER ',' CSV HEADER;
+COPY game_purchases FROM '/localpath/game_purchases.csv' DELIMITER ',' CSV HEADER;
 
 DROP table if exists exp_assignment;
 CREATE table exp_assignment
@@ -41,5 +41,4 @@ exp_name varchar
 )
 ;
 
-COPY game_actions FROM '/localpath/exp_assignment.csv' DELIMITER ',' CSV HEADER;
-
+COPY exp_assignment FROM '/localpath/exp_assignment.csv' DELIMITER ',' CSV HEADER;
