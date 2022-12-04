@@ -1,0 +1,22 @@
+version: '3.9'
+services:
+  alnodapg:
+    image: alnoda/postgres-workspace
+    expose:
+      - '8020-8040'
+    ports:
+      - "8020-8040:8020-8040"
+    volumes:
+      - $PWD:/csv_files/
+  db:
+    environment:
+      HMA_CLI: psql -U sqluser -d sqluser
+      PGDATA: /pgtmpfs
+      POSTGRES_DB: sqluser
+      POSTGRES_USER: sqluser
+      POSTGRES_HOST_AUTH_METHOD: trust
+    image: docker.io/library/postgres:15
+    tmpfs:
+      - /pgtmpfs
+    volumes:
+    - $PWD:/csv_files/:rw
