@@ -22,3 +22,4 @@ Books - Non-technical (
 * Mastermind: How to Think Like Sherlock Holmes by Maria Konnikova
 * The Black Swan: The Impact of the Highly Improbable by Nassim Nicholas Taleb
 * Brain Rules: 12 Principles for Surviving and Thriving at Work, Home, and School
+* Thinking in Bets by Annie Duke
