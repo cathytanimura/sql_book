@@ -13,6 +13,7 @@ sales_month date
 -- populate the table with data from the csv file. Download the file locally before completing this step
 COPY retail_sales 
 FROM '/localpath/us_retail_sales.csv' -- change to the location you saved the csv file
+-- FROM '/docker-entrypoint-initdb.d/us_retail_sales.csv' -- for docker comment out the line above and uncomment this one
 DELIMITER ','
 CSV HEADER
 ;
