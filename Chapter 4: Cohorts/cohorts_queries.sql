@@ -1,72 +1,67 @@
 -- Basic retention
-SELECT id_bioguide
-,min(term_start) as first_term
-FROM legislators_terms 
-GROUP BY 1
-;
+--
+-- Rewritten with CTE's that name intermediate results (sub-queries)
+-- as they are enriched/used from top to bottom...
+--
+with legislators_with_first_term as (
+    select 
+        id_bioguide
+        , min(term_start) as first_term
+    from 
+        legislators_terms 
+    group by 
+        -- Prefer column name, less sensitive to select clause changes : - )
+        id_bioguide
+)
+, retained_counts_by_yearly_period as ( 
+    select 
+        date_part(
+            'year'
+            , age(
+                lt.term_start
+                , lwft.first_term
+            )
+        ) as period
+        , count(distinct lwft.id_bioguide) as cohort_retained
+    from
+        legislators_with_first_term lwft
+        join legislators_terms lt on lt.id_bioguide = lwft.id_bioguide 
+    group by
+        -- Ordinal good here since first column is calculated with function calls ! ! ! 
+        1
+)
+, with_pct_retained as (
+    select
+        period
+        , first_value(cohort_retained) over (order by period) as cohort_size
+        , cohort_retained
+        , cohort_retained * 1.0 / first_value(cohort_retained) over (order by period) as pct_retained
+    from 
+        retained_counts_by_yearly_period
+)
+, pivoted as (
+    select 
+        cohort_size
+        , max(case when period = 0 then pct_retained end) as yr0
+        , max(case when period = 1 then pct_retained end) as yr1
+        , max(case when period = 2 then pct_retained end) as yr2
+        , max(case when period = 3 then pct_retained end) as yr3
+        , max(case when period = 4 then pct_retained end) as yr4
+    from
+        with_pct_retained
+    group by 
+        cohort_size
+)
 
-SELECT date_part('year',age(b.term_start,a.first_term)) as periods
-,count(distinct a.id_bioguide) as cohort_retained
-FROM
-(
-        SELECT id_bioguide
-        ,min(term_start) as first_term
-        FROM legislators_terms 
-        GROUP BY 1
-) a
-JOIN legislators_terms b on a.id_bioguide = b.id_bioguide 
-GROUP BY 1
-;
-
-SELECT period
-,first_value(cohort_retained) over (order by period) as cohort_size
-,cohort_retained
-,cohort_retained * 1.0 / first_value(cohort_retained) over (order by period) as pct_retained
-FROM
-(
-        SELECT date_part('year',age(b.term_start,a.first_term)) as period
-        ,count(distinct a.id_bioguide) as cohort_retained
-        FROM
-        (
-                SELECT id_bioguide
-                ,min(term_start) as first_term
-                FROM legislators_terms 
-                GROUP BY 1
-        ) a
-        JOIN legislators_terms b on a.id_bioguide = b.id_bioguide 
-        GROUP BY 1
-) aa
-;
-
-SELECT cohort_size
-,max(case when period = 0 then pct_retained end) as yr0
-,max(case when period = 1 then pct_retained end) as yr1
-,max(case when period = 2 then pct_retained end) as yr2
-,max(case when period = 3 then pct_retained end) as yr3
-,max(case when period = 4 then pct_retained end) as yr4
-FROM
-(
-        SELECT period
-        ,first_value(cohort_retained) over (order by period) as cohort_size
-        ,cohort_retained
-        ,cohort_retained * 1.0 / first_value(cohort_retained) over (order by period) as pct_retained
-        FROM
-        (
-                SELECT 
-                date_part('year',age(b.term_start,a.first_term)) as period
-                ,count(*) as cohort_retained
-                FROM
-                (
-                        SELECT id_bioguide
-                        ,min(term_start) as first_term
-                        FROM legislators_terms 
-                        GROUP BY 1
-                ) a
-                JOIN legislators_terms b on a.id_bioguide = b.id_bioguide 
-                GROUP BY 1
-        ) aa
-) aaa
-GROUP BY 1
+select
+    *
+from 
+    -- Can comment in/out the tables on lines below to see the data 
+    -- as it is "enriched" on the way down through CTEs above...
+    -- legislators_with_first_term
+    -- retained_counts_by_yearly_period
+    with_pct_retained 
+    -- pivoted
 ;
 
 -- Time adjustments
