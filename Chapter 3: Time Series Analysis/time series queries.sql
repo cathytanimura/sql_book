@@ -234,7 +234,37 @@ JOIN retail_sales b on a.kind_of_business = b.kind_of_business
 WHERE a.kind_of_business = 'Women''s clothing stores'
 and a.sales_month = '2019-12-01'
 ;
+-- sales_month    | kind_of_business          | sales
+-- ---------------+---------------------------+--------
+-- 2023-01-01     | Women's clothing stores   | 100
+-- 2023-02-01     | Women's clothing stores   | 120
+-- 2023-03-01     | Women's clothing stores   | 90
+-- 2023-04-01     | Women's clothing stores   | 110
+-- 2023-05-01     | Women's clothing stores   | 130
+-- 2023-06-01     | Women's clothing stores   | 140
+-- 2023-07-01     | Women's clothing stores   | 150
+-- 2023-08-01     | Women's clothing stores   | 160
+-- 2023-09-01     | Women's clothing stores   | 170
+-- 2023-10-01     | Women's clothing stores   | 180
+-- 2023-11-01     | Women's clothing stores   | 190
+-- 2023-12-01     | Women's clothing stores   | 200
+-- 2024-01-01     | Women's clothing stores   | 210
 
+-- sales_month  | sales | moving_avg | records_count
+-- -------------+-------+------------+--------------
+-- 2023-01-01   | 100   | 100.00    | 1
+-- 2023-02-01   | 120   | 110.00    | 2
+-- 2023-03-01   | 90    | 103.33    | 3
+-- 2023-04-01   | 110   | 105.00    | 4
+-- 2023-05-01   | 130   | 110.00    | 5
+-- 2023-06-01   | 140   | 115.00    | 6
+-- 2023-07-01   | 150   | 120.00    | 7
+-- 2023-08-01   | 160   | 125.00    | 8
+-- 2023-09-01   | 170   | 130.00    | 9
+-- 2023-10-01   | 180   | 135.00    | 10
+-- 2023-11-01   | 190   | 140.00    | 11
+-- 2023-12-01   | 200   | 145.00    | 12
+-- 2024-01-01   | 210   | 154.17    | 12
 SELECT a.sales_month
 ,a.sales
 ,avg(b.sales) as moving_avg
