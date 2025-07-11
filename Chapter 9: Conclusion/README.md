@@ -18,11 +18,14 @@ ML / AI Podcasts
 * 80,000 Hours: https://80000hours.org/podcast/
 
 
-Data Newsletters
+Data / ML / AI Newsletters
+* Counting Stuff: https://www.counting-stuff.com/
 * Data Elixir: https://dataelixir.com/
 * Eugene Yan: https://eugeneyan.com/
+* Pivot 5: https://pivot5.beehiiv.com/
+* Inside Data by Mikkel Dengsøe: https://mikkeldengsoe.substack.com/
 
-Books - Non-technical (
+Books - Non-technical
 * How to Measure Anything: Finding the Value of "Intangibles" in Business by Douglas Hubbard
 * Thinking, Fast and Slow by Daniel Kahneman
 * Mastermind: How to Think Like Sherlock Holmes by Maria Konnikova
