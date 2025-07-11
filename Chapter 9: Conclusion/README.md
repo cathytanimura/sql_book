@@ -5,12 +5,18 @@ Data Podcasts (these cover a range of analytics and data science topics, but are
 * Data Bytes by Women in Data: https://anchor.fm/women-in-data
 * Data Engineering Podcast: https://www.dataengineeringpodcast.com/
 * DataFramed: https://www.datacamp.com/community/podcast
-* Data Skeptic: https://dataskeptic.com/
 * Gradient Dissent: https://podcasts.apple.com/us/podcast/gradient-dissent-exploring-machine-learning-ai-deep/id1504567418 or https://open.spotify.com/show/7o9r3fFig3MhTJwehXDbXm 
 * Klaviyo Data Science Podcast: https://medium.com/klaviyo-data-science/tagged/podcast
-* TWIML: https://twimlai.com/shows/
 * Women in Data Science: https://www.widsconference.org/podcast.html
 * You are Not So Smart: https://youarenotsosmart.com/podcast/
+
+ML / AI Podcasts
+* Data Skeptic: https://dataskeptic.com/
+* Latent Space: https://www.latent.space/podcast
+* The Cognitive Revolution: https://www.cognitiverevolution.ai/
+* TWIML: https://twimlai.com/shows/
+* 80,000 Hours: https://80000hours.org/podcast/
+
 
 Data Newsletters
 * Data Elixir: https://dataelixir.com/
